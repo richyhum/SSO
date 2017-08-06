@@ -12,8 +12,8 @@
         <plugins>
             <plugin>
                 <groupId>com.rimerosolutions.maven.plugins</groupId>
-          	<artifactId>wrapper-maven-plugin</artifactId>
-          	<version>0.0.4</version>
+	          	<artifactId>wrapper-maven-plugin</artifactId>
+	          	<version>0.0.4</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -89,17 +89,37 @@
 		</dependency>
 		<!-- Add JDBC Support end -->
 		<!-- JPA Ticket Registry start --> 
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.jasig.cas</groupId>
 		    <artifactId>cas-server-support-jpa-ticket-registry</artifactId>
 		    <version>4.2.7</version>
-		</dependency>
+		</dependency> -->
 		<!-- JPA Ticket Registry end -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.jasig.cas</groupId>
 		    <artifactId>cas-server-support-jpa-service-registry</artifactId>
 		    <version>4.2.7</version>
+		</dependency> -->
+		
+		<!--add rest support start -->
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-rest</artifactId>
+		    <version>${cas.version}</version>
+		    <scope>runtime</scope>
 		</dependency>
+		<!--add rest support end -->
+		
+		<!--add rest services support start -->
+		<dependency>
+		    <groupId>org.jasig.cas</groupId>
+		    <artifactId>cas-server-support-rest-services</artifactId>
+		    <version>${cas.version}</version>
+		    <scope>runtime</scope>
+		</dependency>
+		<!--add rest services support end -->
+		
+
     </dependencies>
 
     <properties>
@@ -109,8 +129,8 @@
         <maven.compiler.target>1.7</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <!-- 
-    <repositories>
+    
+    <!-- <repositories>
         <repository>
             <id>sonatype-releases</id>
             <url>http://oss.sonatype.org/content/repositories/releases/</url>
@@ -123,6 +143,6 @@
             <id>shibboleth-releases</id>
             <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
         </repository>
-    </repositories> 
-    --> 
+    </repositories>  -->
+    
 </project>

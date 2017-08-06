@@ -34,8 +34,9 @@
 		can be moved between tiers without modification.
 	</description>
 
-    <util:properties id="casProperties" location="file:/etc/cas/cas.properties" />
-
+    <util:properties id="casProperties" location="classpath:/etc/cas/cas.properties" />
+<!-- 	<util:properties id="casProperties" location="file:${config_env_casfile}" /> -->
+	
     <context:property-placeholder properties-ref="casProperties" />
 
 </beans>

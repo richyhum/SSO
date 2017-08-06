@@ -27,9 +27,30 @@
     </util:list>
 
     <bean id="attributeRepository" class="org.jasig.services.persondir.support.NamedStubPersonAttributeDao"
-          p:backingMap-ref="attrRepoBackingMap" />
+          p:backingMap-ref="attrRepoBackingMap" /> 
 
-<!--     <alias name="acceptUsersAuthenticationHandler" alias="primaryAuthenticationHandler" /> -->
+	<!-- <bean id="attributeRepository"
+        class="org.jasig.services.persondir.support.jdbc.SingleRowJdbcPersonAttributeDao">
+        <constructor-arg index="0" ref="dataSource" />
+        <constructor-arg index="1"
+            value="SELECT id,username,password,enabled FROM cas_user WHERE {0}" />
+        <property name="queryAttributeMapping">
+            <map>
+                <entry key="username" value="username" />
+            </map>
+        </property>
+        <property name="resultAttributeMapping">
+            <map>
+                key为对应的数据库字段名称，value为提供给客户端获取的属性名字，系统会自动填充值
+                <entry key="id" value="id"></entry>
+                <entry key="username" value="username"></entry>
+                <entry key="password" value="password"></entry>
+                <entry key="enabled" value="enabled"></entry>
+            </map>
+        </property>
+    </bean> -->
+
+	<!-- <alias name="acceptUsersAuthenticationHandler" alias="primaryAuthenticationHandler" /> -->
     
     <bean id="dataSource"
 		  class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -50,9 +71,12 @@
     
     <alias name="queryDatabaseAuthenticationHandler" alias="primaryAuthenticationHandler" />
 	<alias name="dataSource" alias="queryDatabaseDataSource" />
+
+	<!-- 配合cas.authn.password.encoding.alg=MD5使用  -->
+	<alias name="defaultPasswordEncoder" alias="passwordEncoder" />
 	
 	<!-- <alias name="queryAndEncodeDatabaseAuthenticationHandler" alias="primaryAuthenticationHandler" />
-	<alias name="dataSource" alias="queryEncodeDatabaseDataSource" /> -->
+	<alias name="dataSource" alias="queryEncodeDatabaseDataSource" />  -->
 	
     <alias name="personDirectoryPrincipalResolver" alias="primaryPrincipalResolver" />
 
@@ -68,7 +92,7 @@
                 <value>org</value>
             </list>
         </entry>
-    </util:map>
+    </util:map> 
 
     <alias name="serviceThemeResolver" alias="themeResolver" />
 
@@ -98,4 +122,9 @@
     <alias name="defaultAuthenticationTransactionManager" alias="authenticationTransactionManager" />
     <alias name="defaultPrincipalElectionStrategy" alias="principalElectionStrategy" />
     <alias name="tgcCipherExecutor" alias="defaultCookieCipherExecutor" />
+    
+    <!-- 4.2以下才能使用 ，4.2以上需要在 cas.properties文件上配置 -->
+    <!-- 增加参数p:requireSecure="false"，是否需要安全验证，即HTTPS，false为不采用  -->
+    <!-- <bean class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
+		p:httpClient-ref="httpClient"  p:requireSecure="false"/>  -->
 </beans>
